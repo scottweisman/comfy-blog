@@ -12,19 +12,23 @@ end
 
 module ComfyBlog
   class << self
-    
+
     def configure
       yield configuration
     end
-    
+
     def configuration
       @configuration ||= Configuration.new
     end
     alias :config :configuration
-    
+
     def disqus_enabled?
       self.config.disqus_shortname.present?
     end
-    
+
+    def comments_enabled?
+      self.config.comments_enabled
+    end
+
   end
 end

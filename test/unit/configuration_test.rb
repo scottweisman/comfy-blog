@@ -1,7 +1,7 @@
 require File.expand_path('../test_helper', File.dirname(__FILE__))
 
 class ConfigurationTest < ActiveSupport::TestCase
-  
+
   def test_configuration
     assert config = ComfyBlog.configuration
     assert_equal 'ComfyBlog',               config.title
@@ -13,17 +13,23 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal 10,                        config.posts_per_page
     assert_equal false,                     config.auto_publish_comments
     assert_equal nil,                       config.disqus_shortname
+    assert_equal true,                      config.comments_enabled
   end
-  
+
   def test_initialization_overrides
     ComfyBlog.config.admin_route_prefix = 'new-admin'
     assert_equal 'new-admin', ComfyBlog.config.admin_route_prefix
   end
-  
+
   def test_disqus_enabled?
     assert !ComfyBlog.disqus_enabled?
     ComfyBlog.config.disqus_shortname = 'test'
     assert ComfyBlog.disqus_enabled?
   end
-  
+
+  def test_comments_enabled?
+    ComfyBlog.config.comments_enabled = true
+    assert ComfyBlog.comments_enabled?
+  end
+
 end

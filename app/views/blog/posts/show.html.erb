@@ -2,8 +2,8 @@
 
 <% if ComfyBlog.disqus_enabled? %>
   <%= render :partial => 'blog/comments/disqus' %>
-  
-<% else %>
+
+<% elsif ComfyBlog.comments_enabled? %>
   <div id='comments'>
     <% @post.comments.each do |comment| %>
       <%= render :partial => 'blog/comments/comment', :object => comment %>
